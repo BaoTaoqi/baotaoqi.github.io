@@ -125,19 +125,22 @@
 
 
 
-<meta name="description" content="City of stars, are you shining for me?">
+<meta name="description" content="前言：本片主要介绍三个基本边缘检测的算子（canny算子、sobel算子、laplace算子），关于三个算子的原理和介绍ck2016的简书博客：数字图像 - 边缘检测原理 - Sobel, Laplace, Canny算子www.jianshu.com/p/2334bee37de5 介绍的非常通俗易懂和详细，下面主要放函数原型，测试代码和图片展示～ 原图：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《La La Land》：有关闪耀而易碎的、遗憾而完美的那些事">
-<meta property="og:url" content="http://yoursite.com/2019/01/21/Land/index.html">
+<meta property="og:title" content="三种基本边缘检测算子">
+<meta property="og:url" content="http://yoursite.com/2019/03/13/OpenCV-Learning-Day-3/index.html">
 <meta property="og:site_name" content="Caesar Bao&#39;s blogs">
-<meta property="og:description" content="City of stars, are you shining for me?">
+<meta property="og:description" content="前言：本片主要介绍三个基本边缘检测的算子（canny算子、sobel算子、laplace算子），关于三个算子的原理和介绍ck2016的简书博客：数字图像 - 边缘检测原理 - Sobel, Laplace, Canny算子www.jianshu.com/p/2334bee37de5 介绍的非常通俗易懂和详细，下面主要放函数原型，测试代码和图片展示～ 原图：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/01/21/Land/1.jpg">
-<meta property="og:updated_time" content="2019-01-21T15:11:33.956Z">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/OpenCV-Learning-Day-3/Girl.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/OpenCV-Learning-Day-3/canny.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/OpenCV-Learning-Day-3/sobel.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/13/OpenCV-Learning-Day-3/laplace.png">
+<meta property="og:updated_time" content="2019-03-13T13:24:00.823Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="《La La Land》：有关闪耀而易碎的、遗憾而完美的那些事">
-<meta name="twitter:description" content="City of stars, are you shining for me?">
-<meta name="twitter:image" content="http://yoursite.com/2019/01/21/Land/1.jpg">
+<meta name="twitter:title" content="三种基本边缘检测算子">
+<meta name="twitter:description" content="前言：本片主要介绍三个基本边缘检测的算子（canny算子、sobel算子、laplace算子），关于三个算子的原理和介绍ck2016的简书博客：数字图像 - 边缘检测原理 - Sobel, Laplace, Canny算子www.jianshu.com/p/2334bee37de5 介绍的非常通俗易懂和详细，下面主要放函数原型，测试代码和图片展示～ 原图：">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/13/OpenCV-Learning-Day-3/Girl.jpg">
 
 
 
@@ -167,13 +170,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/01/21/Land/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/13/OpenCV-Learning-Day-3/">
 
 
 
 
 
-  <title>《La La Land》：有关闪耀而易碎的、遗憾而完美的那些事 | Caesar Bao's blogs</title>
+  <title>三种基本边缘检测算子 | Caesar Bao's blogs</title>
   
 
 
@@ -312,7 +315,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/21/Land/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/13/OpenCV-Learning-Day-3/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Caesar Bao">
@@ -329,7 +332,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">《La La Land》：有关闪耀而易碎的、遗憾而完美的那些事</h1>
+          <h1 class="post-title" itemprop="name headline">三种基本边缘检测算子</h1>
         
 
         <div class="post-meta">
@@ -341,8 +344,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-21T18:41:25+08:00">
-                2019-01-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-13T19:16:53+08:00">
+                2019-03-13
               </time>
             
 
@@ -364,8 +367,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Film-Comment/" itemprop="url" rel="index">
-                    <span itemprop="name">Film Comment</span>
+                  <a href="/categories/OpenCV/" itemprop="url" rel="index">
+                    <span itemprop="name">OpenCV</span>
                   </a>
                 </span>
 
@@ -382,8 +385,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/01/21/Land/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/21/Land/" itemprop="commentCount"></span>
+                <a href="/2019/03/13/OpenCV-Learning-Day-3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/13/OpenCV-Learning-Day-3/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -411,15 +414,28 @@
       
 
       
-        <h1 id="City-of-stars-are-you-shining-for-me"><a href="#City-of-stars-are-you-shining-for-me" class="headerlink" title="City of stars, are you shining for me?"></a>City of stars, are you shining for me?</h1><img src="/2019/01/21/Land/1.jpg">
+        <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>本片主要介绍三个基本边缘检测的算子（canny算子、sobel算子、laplace算子），关于三个算子的原理和介绍ck2016的简书博客：<br><blockquote><footer><strong>数字图像 - 边缘检测原理 - Sobel, Laplace, Canny算子</strong><cite><a href="https://www.jianshu.com/p/2334bee37de5" target="_blank" rel="noopener">www.jianshu.com/p/2334bee37de5</a></cite></footer></blockquote></p>
+<p>介绍的非常通俗易懂和详细，下面主要放函数原型，测试代码和图片展示～</p>
+<p>原图：<br><img src="/2019/03/13/OpenCV-Learning-Day-3/Girl.jpg"></p>
 <a id="more"></a>
-<p>LA，los angeles，city of stars，确实太过闪耀，有太多人，哪怕从未踏上洛杉矶的土地，也对那里根种了太多美好的幻想。我想起几年前我拿着我新买的PS4，打开《GTA V》的时候，我的天！主角Michael的家外边就是粼粼的海面和充满“热情”的沙滩，无云而湛蓝的天际延伸至远处渐渐变淡，与海面交融直至分不清楚。坐上红色跑车，手搭在车窗上，沿着海岸线一路向北，深红色的岩石蒸腾着热气，视线延伸向上看见绿色————是棕榈树————阳光刺眼，模模糊糊，看不真切；渐入钢铁丛林，阳光也是热辣的吓人，大片大片的反光，大片大片的明媚，西装革履的男人，潮流青年，穿休闲服遛狗的人，酒鬼，或昂首挺胸，或散散漫漫，或失魂落魄，穿梭在层层叠叠的阴影和光斑之间，完美融进这这城市里，一如他们迥然的处境和各不相同的命运。也许是Rockstar太过顶级的美工，又有可能是他们早年的作品圣安第列斯已经满足了我的杀戮欲望，现在我规规矩矩地在马路上开着我的车，老老实实的等着红灯熄灭，绿灯闪烁，循规蹈矩的和其他市民一般驾驶。再往上开，房子渐渐的又变矮了，地势升高，一块巨大的标牌从山顶慢慢向我挪来。我慢慢驶近，在不经意间，它突然变得明亮起来。</p>
-<p>啊，HOLLY WOOD。</p>
-<p>闪亮的灯牌提醒我天色已晚。我下了车，站在富人区的山顶上，眺望着整个圣洛都。细小闪耀的灯光如同沙粒，连着川流不息的车流，成了江成了河，向我诉说这座钢之巨人自他从这片泥土地里诞生起便永不入睡。是啊，它是如此勤奋地活着，连同它身体里的人们，仿佛都是永不入睡的，为了梦想，为了家庭，为了生活，抑或是吸了毒嗨了药，who cares？圣洛都的天空，是我见过的最美的天空————渐变色的，难以形容————或者可以想象一下，你现在正在一个晚宴上，和你心仪的人交谈，总有那么一两个时候你会觉得羞涩，心里有头小鹿撞来撞去，眼神不知道该往哪里看；于是你只好低头盯着你手里拿着的酒杯，因为这样显得你优雅而有礼貌，你开始端详葡萄酒的颜色：深红的葡萄酒被晚宴上昏暗的光线一打，自底向上由浅入深，不断的变换着色彩，可能是浅粉色，可能是淡蓝色，可能是深紫色；你挪动酒杯，颜色也跟着变化————是了，这就是LA的夜空，不仅仅是渐变的，柔和的，绚丽的，同时，它也是暧昧的，易碎的，不可告人的。</p>
-<p>后来我打通了游戏，我最后一次看着Michael，Franklin，Trevor站在一起，看着车子渐渐沉进海底，三个人各自说着像总结一样的话，仿佛是隔着屏幕告诉我们他们的故事到这里就结束了，从今往后他们三个再在哪里相见，以什么样的方式相见，都不再关我的事，自北扬克顿拉开帷幕的故事到这里收场，生活还要继续；后来，因为学习，我（被强迫）收起了我的PS4，到那个时候我已经能轻车熟路的开遍圣洛都的大街小巷，我已然成为了一个老圣洛都人；可是那一晚，我打开我新买的PS4，打开我新买的《GTA V》，逛了逛海滩，坐上我的红色跑车，一路向北……那一幕幕带给我的震撼，我将永远不会忘记。因为是从那个时候起，我真正地将游戏打心底里视为一种艺术，而不是什么害人的消遣，到后来，我从网上知道原来GTA系列是描述美国梦的，我总是不由自主地和那个夜晚联系在一起——繁华的，易碎的，暧昧的，不可告人的……大概就是这样的吧。</p>
-<p>我写了这么长的铺垫，其实是想告诉你，为什么我会对这部电影感触如此之深：不仅仅是因为我再次看到了那些似曾相识的场景，美丽的难以忘怀；而且我还看到了另一个故事，有关美国梦的故事，美好的令人心碎。一如这部电影的画面，我明知现实生活中不可能发生这样的故事，却根本不愿意去质疑。就让我带着迷蒙的的眼神，盯着那只葡萄酒杯；就让我微醺的脸色，更浓一分吧。</p>
-<p>就当我做了一个梦，而我选择再不复醒。</p>
-<p>还没写完先放放。</p>
+<h2 id="一、canny算子："><a href="#一、canny算子：" class="headerlink" title="一、canny算子："></a>一、canny算子：</h2><p>函数原型：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> cv::Canny  (   InputArray  image,</span><br><span class="line"><span class="comment">//输入图像，必须为单通道灰度图</span></span><br><span class="line">OutputArray     edges,</span><br><span class="line"><span class="comment">//输出图像，为单通道黑白图</span></span><br><span class="line"><span class="keyword">double</span>  threshold1,</span><br><span class="line"><span class="keyword">double</span>  threshold2,</span><br><span class="line"><span class="comment">//第三个参数和第四个参数表示阈值，这二个阈值中当中的小阈值用来控制边缘连接，大的阈值用来控制强边缘的初始分割，即如果一个像素的梯度大于上限值，则被认为是边缘像素，如果小于下限阈值，则被抛弃。如果该点的梯度在两者之间则当这个点与高于上限值的像素点连接时我们才保留，否则删除。</span></span><br><span class="line"><span class="keyword">int</span>     apertureSize = <span class="number">3</span>,</span><br><span class="line"><span class="comment">//第五个参数表示Sobel 算子大小，默认为3即表示一个3*3的矩阵。Sobel 算子与高斯拉普拉斯算子都是常用的边缘算子</span></span><br><span class="line"><span class="keyword">bool</span>    L2gradient = <span class="literal">false</span> </span><br><span class="line">)   </span><br></pre></td></tr></table></figure></p>
+<p>测试代码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;opencv2/imgproc/imgproc.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">Mat srcImage = imread(<span class="string">"Girl.jpg"</span>);</span><br><span class="line">imshow(<span class="string">"srcImage"</span>,srcImage);</span><br><span class="line"></span><br><span class="line">Mat grayImage, dstImage;</span><br><span class="line">cvtColor(srcImage,grayImage,COLOR_BGR2GRAY);</span><br><span class="line"></span><br><span class="line">blur(grayImage,dstImage,Size(<span class="number">3</span>,<span class="number">3</span>));</span><br><span class="line"></span><br><span class="line">Canny(dstImage,dstImage,<span class="number">3</span>,<span class="number">9</span>,<span class="number">3</span>);</span><br><span class="line">imshow(<span class="string">"dstImage"</span>,dstImage);</span><br><span class="line"></span><br><span class="line">waitKey(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>效果图：<br><img src="/2019/03/13/OpenCV-Learning-Day-3/canny.png"></p>
+<p>需要注意的是，canny算子在算出梯度值后会有勾勒边缘的一步：把区域内不是极值的点全部置0，因此效果图中的边缘会变成细线，但同时也会导致一些弱的边缘会被抹去，因此canny算子提供了两个阈值的设置，数值超过大阈值的像素点会被认为是边缘，低于小阈值的像素点被认为不是边缘，数值处于两个阈值之间的，将由周围已经被认为是边缘的像素点开始走格子，可达的是边缘，不可达的被认为不是。阈值的大小比最好为2：1或3：1。</p>
+<h2 id="二、sobel算子"><a href="#二、sobel算子" class="headerlink" title="二、sobel算子"></a>二、sobel算子</h2><p>函数原型：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Sobel</span><span class="params">( </span></span></span><br><span class="line"><span class="function"><span class="params">InputArray src, <span class="comment">//输入图像</span></span></span></span><br><span class="line"><span class="function"><span class="params">OutputArray dst, <span class="comment">//输出图像</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">int</span> ddepth,<span class="comment">//目标图像的颜色深度</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">int</span> dx, <span class="comment">//取1表示对x求一阶导数，用来检测竖直边缘</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">int</span> dy, <span class="comment">//取1表示对y求一阶导数，用来检测水平边缘</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">int</span> ksize=<span class="number">3</span>, <span class="comment">//sobel核的大小，必须是奇数，默认为3</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">double</span> scale=<span class="number">1</span>, </span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">double</span> delta=<span class="number">0</span>,</span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">int</span> borderType=BORDER_DEFAULT )</span></span>;</span><br></pre></td></tr></table></figure><br>测试代码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;opencv2/imgproc/imgproc.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">Mat srcImage = imread(<span class="string">"Girl.jpg"</span>);</span><br><span class="line">imshow(<span class="string">"scrImage"</span>,srcImage);</span><br><span class="line"></span><br><span class="line">Mat grayImage, dstImage;</span><br><span class="line">Mat grad_x,abs_grad_x,grad_y,abs_grad_y;</span><br><span class="line"></span><br><span class="line"><span class="comment">//取灰度图和模糊降噪</span></span><br><span class="line">cvtColor(srcImage,grayImage,COLOR_BGR2GRAY);</span><br><span class="line">blur(grayImage,dstImage,Size(<span class="number">3</span>,<span class="number">3</span>));</span><br><span class="line"></span><br><span class="line">Sobel(grayImage,grad_x,CV_16S,<span class="number">1</span>,<span class="number">0</span>,<span class="number">3</span>); <span class="comment">//sobel算子使用16位有符号的数据类型,防止截断</span></span><br><span class="line">convertScaleAbs(grad_x,abs_grad_x); <span class="comment">//用convertScaleAbs()函数将其转回原来的uint8形式</span></span><br><span class="line">Sobel(grayImage,grad_y,CV_16S,<span class="number">0</span>,<span class="number">1</span>,<span class="number">3</span>);</span><br><span class="line">convertScaleAbs(grad_y,abs_grad_y);</span><br><span class="line">addWeighted(abs_grad_x,<span class="number">0.5</span>,abs_grad_y,<span class="number">0.5</span>,<span class="number">0</span>,dstImage);</span><br><span class="line"></span><br><span class="line">imshow(<span class="string">"dstImage"</span>,dstImage);</span><br><span class="line"></span><br><span class="line">waitKey(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>效果图：<br><img src="/2019/03/13/OpenCV-Learning-Day-3/sobel.png"></p>
+<p>1.需要注意的是，sobel算子的颜色深度最好使用CV_16S，因为OpenCV文档中对Sobel算子的介绍中有这么一句：“in the case of 8-bit input images it will result in truncated derivatives”。即Sobel函数求完导数后会有负值，还有会大于255的值。而原图像是uint8，即8位无符号数，所以Sobel建立的图像位数不够，会有截断，因此要使用16位有符号的数据类型，即cv2.CV_16S。因此在计算完之后要用convertScaleAbs()函数将其转回原来的uint8形式。<br>2.addWeighted()函数是将两张相同大小，相同类型的图片融合的函数。</p>
+<p>函数原型：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cvAddWeighted</span><span class="params">( </span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">const</span> CvArr* src1, <span class="comment">//第一个原数组</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">double</span> alpha,<span class="comment">//第一个数组元素权重</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">const</span> CvArr* src2, <span class="comment">//第二个原数值</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">double</span> beta,<span class="comment">//第二个数组元素权重</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">double</span> gamma, <span class="comment">//两个数组作和后添加的数值。不要太大，不然图片一片白。总和等于255以上就是纯白色了</span></span></span></span><br><span class="line"><span class="function"><span class="params">CvArr* dst )</span></span>;<span class="comment">//输出图像</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="三、laplace算子"><a href="#三、laplace算子" class="headerlink" title="三、laplace算子"></a>三、laplace算子</h2><p>函数原型：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Laplacian</span><span class="params">( </span></span></span><br><span class="line"><span class="function"><span class="params">src_gray, <span class="comment">//输入图像</span></span></span></span><br><span class="line"><span class="function"><span class="params">dst, <span class="comment">//输出图像</span></span></span></span><br><span class="line"><span class="function"><span class="params">ddepth, <span class="comment">//因为输入图像一般为CV_8U，为了避免数据溢出，输出图像深度应该设置为CV_16S</span></span></span></span><br><span class="line"><span class="function"><span class="params">kernel_size, <span class="comment">//核大小，默认为3</span></span></span></span><br><span class="line"><span class="function"><span class="params">scale, </span></span></span><br><span class="line"><span class="function"><span class="params">delta, </span></span></span><br><span class="line"><span class="function"><span class="params">BORDER_DEFAULT)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>测试代码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;opencv2/imgproc/imgproc.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">Mat srcImage = imread(<span class="string">"Girl.jpg"</span>);</span><br><span class="line">imshow(<span class="string">"srcImage"</span>,srcImage);</span><br><span class="line"></span><br><span class="line">Mat grayImage, dstImage;</span><br><span class="line"></span><br><span class="line"><span class="comment">//取灰度图和模糊降噪</span></span><br><span class="line">cvtColor(srcImage,grayImage,COLOR_BGR2GRAY);</span><br><span class="line">blur(grayImage,dstImage,Size(<span class="number">3</span>,<span class="number">3</span>));</span><br><span class="line"></span><br><span class="line">Laplacian(grayImage,dstImage,CV_16S,<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">convertScaleAbs(dstImage,dstImage);</span><br><span class="line"></span><br><span class="line">imshow(<span class="string">"dstImage"</span>,dstImage);</span><br><span class="line"></span><br><span class="line">waitKey(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>效果图：<br><img src="/2019/03/13/OpenCV-Learning-Day-3/laplace.png"></p>
+<p>需要注意的是，由于输入图像是CV_8U格式，但是在使用laplace是为了防止截断需要转换成CV_16S格式，在计算完之后需要convertScaleAbs()函数转换回CV_8U格式，否则是一张灰色图像，别问我怎么知道的。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>sobel算子产生的边缘有强弱，抗噪性好。<br>laplace算子对边缘敏感，可能有些是噪声的边缘，也被算进来了。<br>canny算走产生的边缘很细，可能就一个像素那么细，没有强弱之分。</p>
+<h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><blockquote><footer><strong>【OpenCV入门教程之十二】OpenCV边缘检测：Canny算子,Sobel算子,Laplace算子,Scharr滤波器合辑</strong><cite><a href="https://blog.csdn.net/poem_qianmo/article/details/25560901" target="_blank" rel="noopener">blog.csdn.net/poem_qianmo/article/details/25560901</a></cite></footer></blockquote>
+<blockquote><footer><strong>数字图像 - 边缘检测原理 - Sobel, Laplace, Canny算子</strong><cite><a href="https://www.jianshu.com/p/2334bee37de5" target="_blank" rel="noopener">www.jianshu.com/p/2334bee37de5</a></cite></footer></blockquote>
+<blockquote><footer><strong>OpenCV-Python教程（6、Sobel算子）</strong><cite><a href="https://blog.csdn.net/sunny2038/article/details/9170013" target="_blank" rel="noopener">blog.csdn.net/sunny2038/article/details/9170013</a></cite></footer></blockquote>
+<blockquote><footer><strong>Opencv--Sobel算子</strong><cite><a href="https://blog.csdn.net/qq_41248872/article/details/82886228" target="_blank" rel="noopener">blog.csdn.net/qq_41248872/article/details/82886228</a></cite></footer></blockquote>
+<blockquote><footer><strong>opencv中addWeighted()函数用法总结（05）</strong><cite><a href="https://blog.csdn.net/fanjiule/article/details/81607873" target="_blank" rel="noopener">blog.csdn.net/fanjiule/article/details/81607873</a></cite></footer></blockquote>
 
       
     </div>
@@ -444,15 +460,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/03/12/OpenCV-Learning-Day-2/" rel="next" title="五种基本滤波器">
+                <i class="fa fa-chevron-left"></i> 五种基本滤波器
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/05/Deep-Learning-Starting/" rel="prev" title="Mac 使用VS Code 通过cmake 配置 OpenCV和Pytorch C++ API">
-                Mac 使用VS Code 通过cmake 配置 OpenCV和Pytorch C++ API <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -603,7 +619,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#City-of-stars-are-you-shining-for-me"><span class="nav-number">1.</span> <span class="nav-text">City of stars, are you shining for me?</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言："><span class="nav-number">1.</span> <span class="nav-text">前言：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、canny算子："><span class="nav-number">2.</span> <span class="nav-text">一、canny算子：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、sobel算子"><span class="nav-number">3.</span> <span class="nav-text">二、sobel算子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、laplace算子"><span class="nav-number">4.</span> <span class="nav-text">三、laplace算子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结："><span class="nav-number">5.</span> <span class="nav-text">总结：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料："><span class="nav-number">6.</span> <span class="nav-text">参考资料：</span></a></li></ol></div>
             
 
           </div>
