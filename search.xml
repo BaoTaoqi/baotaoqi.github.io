@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[OpenCV Learning Day 10]]></title>
+    <title><![CDATA[图像通道的分离与合并]]></title>
     <url>%2F2019%2F03%2F20%2FOpenCV-Learning-Day-10%2F</url>
     <content type="text"><![CDATA[前言不要问，就是水，前言说没就会没。 一、通道的分离（split()函数）和合并（merge()函数）测试代码：1234567891011121314151617181920212223242526272829303132#include &lt;iostream&gt;#include &lt;time.h&gt;#include &lt;string&gt;#include &lt;opencv2/opencv.hpp&gt;#include &lt;opencv2/core/core.hpp&gt;#include &lt;opencv2/highgui/highgui.hpp&gt;#include &lt;opencv2/imgproc/imgproc.hpp&gt;using namespace std;using namespace cv;int main()&#123;Mat srcImage = imread("2.jpg");Mat ImageBlue, ImageGreen, ImageRed;Mat mergeImage;vector&lt;Mat&gt;channels;split(srcImage,channels);ImageBlue = channels.at(0);imshow("Blue Channel",ImageBlue);ImageGreen = channels.at(1);imshow("Green Channel",ImageGreen);ImageRed = channels.at(2);imshow("Red Channel",ImageRed);merge(channels,mergeImage);imshow("mergeImage",mergeImage);waitKey(0);&#125;效果图：蓝色通道：绿色通道：红色通道：合并通道： 1.split()函数：图像通道的分离函数原型：1void split(InputArray m, OutputArrayOfArrays mv)第一个参数为输入图像第二个参数是函数的输出数组或者vector容器 2.merge()函数：图像通道的合并函数原型：1void merge(InputArrayOfArrays mv, OutputArray dst)可以看出merge的两个参数和split函数正好相反：第一个参数是保存函数通道的数组或者vector容器第二个参数为输出图像]]></content>
       <categories>
