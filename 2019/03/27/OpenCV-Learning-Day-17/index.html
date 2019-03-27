@@ -132,7 +132,7 @@
 <meta property="og:site_name" content="Caesar Bao&#39;s blogs">
 <meta property="og:description" content="前言：昨天角度定位的问题解决了……角度还是算不出来，我调整了几个函数，在图像旋转之后再次使用Rotate()函数得到外接矩形的点阵信息，然后标记ROI图形区域裁剪图像并用imwrite()函数读出。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-27T10:49:32.537Z">
+<meta property="og:updated_time" content="2019-03-27T11:48:42.180Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基本是最终版本的小工程">
 <meta name="twitter:description" content="前言：昨天角度定位的问题解决了……角度还是算不出来，我调整了几个函数，在图像旋转之后再次使用Rotate()函数得到外接矩形的点阵信息，然后标记ROI图形区域裁剪图像并用imwrite()函数读出。">
@@ -375,16 +375,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/27/OpenCV-Learning-Day-17/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/27/OpenCV-Learning-Day-17/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -481,7 +471,9 @@
 
   
     <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MzQyNy8xOTk2OA=="></div>
     </div>
+
   
 
 
@@ -827,37 +819,26 @@
 
 
   
-
-
-
-
-
-
-
-
-
-
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
-  <script type="text/javascript">
-    var GUEST = ['nick','mail','link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item=>{
-      return GUEST.indexOf(item)>-1;
-    });
-    new Valine({
-        el: '#comments' ,
-        verify: false,
-        notify: false,
-        appId: 'FqT1BasQEtlKnANrMNyUJhJP-gzGzoHsz',
-        appKey: '3LoAAF3U0OF56uiu9r6eyMK5',
-        placeholder: 'Just go go',
-        avatar:'mm',
-        guest_info:guest,
-        pageSize:'10' || 10,
-    });
-  </script>
+
+
+
+
+
+
+
+
+
 
 
 
