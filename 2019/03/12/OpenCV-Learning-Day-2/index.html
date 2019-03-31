@@ -125,12 +125,12 @@
 
 
 
-<meta name="description" content="前言：本片主要介绍五个常见的滤波器（线性滤波、方框滤波、高斯滤波、中值滤波、双边滤波），文章基本是我翻阅博客整理而成的笔记～目前水平太菜了自己写不了基础知识，只能整理大神们的文章了！">
+<meta name="description" content="前言本片主要介绍五个常见的滤波器（线性滤波、方框滤波、高斯滤波、中值滤波、双边滤波），文章基本是我翻阅博客整理而成的笔记～目前水平太菜了自己写不了基础知识，只能整理大神们的文章了！">
 <meta property="og:type" content="article">
 <meta property="og:title" content="五种基本滤波器">
 <meta property="og:url" content="http://yoursite.com/2019/03/12/OpenCV-Learning-Day-2/index.html">
 <meta property="og:site_name" content="Caesar Bao&#39;s blogs">
-<meta property="og:description" content="前言：本片主要介绍五个常见的滤波器（线性滤波、方框滤波、高斯滤波、中值滤波、双边滤波），文章基本是我翻阅博客整理而成的笔记～目前水平太菜了自己写不了基础知识，只能整理大神们的文章了！">
+<meta property="og:description" content="前言本片主要介绍五个常见的滤波器（线性滤波、方框滤波、高斯滤波、中值滤波、双边滤波），文章基本是我翻阅博客整理而成的笔记～目前水平太菜了自己写不了基础知识，只能整理大神们的文章了！">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/03/12/OpenCV-Learning-Day-2/InputImage.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/03/12/OpenCV-Learning-Day-2/blur.jpg">
@@ -138,10 +138,10 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/12/OpenCV-Learning-Day-2/GaussianBlur.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/03/12/OpenCV-Learning-Day-2/medianBlur.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/03/12/OpenCV-Learning-Day-2/bilateralFilter.jpg">
-<meta property="og:updated_time" content="2019-03-26T02:44:15.456Z">
+<meta property="og:updated_time" content="2019-03-31T11:26:56.929Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="五种基本滤波器">
-<meta name="twitter:description" content="前言：本片主要介绍五个常见的滤波器（线性滤波、方框滤波、高斯滤波、中值滤波、双边滤波），文章基本是我翻阅博客整理而成的笔记～目前水平太菜了自己写不了基础知识，只能整理大神们的文章了！">
+<meta name="twitter:description" content="前言本片主要介绍五个常见的滤波器（线性滤波、方框滤波、高斯滤波、中值滤波、双边滤波），文章基本是我翻阅博客整理而成的笔记～目前水平太菜了自己写不了基础知识，只能整理大神们的文章了！">
 <meta name="twitter:image" content="http://yoursite.com/2019/03/12/OpenCV-Learning-Day-2/InputImage.jpg">
 
 
@@ -411,7 +411,7 @@
       
 
       
-        <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>本片主要介绍五个常见的滤波器（线性滤波、方框滤波、高斯滤波、中值滤波、双边滤波），文章基本是我翻阅博客整理而成的笔记～目前水平太菜了自己写不了基础知识，只能整理大神们的文章了！</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本片主要介绍五个常见的滤波器（线性滤波、方框滤波、高斯滤波、中值滤波、双边滤波），文章基本是我翻阅博客整理而成的笔记～目前水平太菜了自己写不了基础知识，只能整理大神们的文章了！</p>
 <a id="more"></a>
 <h2 id="测试代码："><a href="#测试代码：" class="headerlink" title="测试代码："></a>测试代码：</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include&lt;opencv2/opencv.hpp&gt;</span></span><br><span class="line"><span class="comment">#include&lt;opencv2/highgui/highgui.hpp&gt;</span></span><br><span class="line"><span class="comment">#include&lt;opencv2/imgproc/imgproc.hpp&gt;</span></span><br><span class="line"><span class="comment">#include&lt;string&gt;</span></span><br><span class="line">using namespace cv<span class="comment">;</span></span><br><span class="line">using namespace std<span class="comment">;</span></span><br><span class="line">int main()&#123;</span><br><span class="line">    Mat srcImage = imread(<span class="string">"Bilbo.jpg"</span>)<span class="comment">;</span></span><br><span class="line">    imshow(<span class="string">"Input Image"</span>,srcImage)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    Mat dstImage<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">blur(srcImage,dstImage,Size(3,3));</span></span><br><span class="line"><span class="keyword"> </span>   imshow(<span class="string">"blur"</span>,dstImage)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">boxFilter(srcImage,dstImage,-1,Size(3,3));</span></span><br><span class="line"><span class="keyword"> </span>   imshow(<span class="string">"boxFilter"</span>,dstImage)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    GaussianBlur(srcImage,dstImage,Size(<span class="number">3</span>,<span class="number">3</span>),<span class="number">0</span>,<span class="number">0</span>)<span class="comment">;</span></span><br><span class="line">    imshow(<span class="string">"GaussianBlur"</span>,dstImage)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    medianBlur(srcImage,dstImage,<span class="number">3</span>)<span class="comment">;</span></span><br><span class="line">    imshow(<span class="string">"medianBlur"</span>,dstImage)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">bilateralFilter(srcImage,dstImage,100,0,0);</span></span><br><span class="line"><span class="keyword"> </span>   imshow(<span class="string">"bilateralFilter"</span>,dstImage)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">waitKey(0);</span></span><br><span class="line"><span class="keyword">&#125;</span></span><br></pre></td></tr></table></figure>
 <p>效果图：<br><img src="/2019/03/12/OpenCV-Learning-Day-2/InputImage.jpg"></p>
@@ -646,7 +646,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言："><span class="nav-number">1.</span> <span class="nav-text">前言：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试代码："><span class="nav-number">2.</span> <span class="nav-text">测试代码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、基本滤波器"><span class="nav-number">3.</span> <span class="nav-text">一、基本滤波器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-线性滤波"><span class="nav-number">3.1.</span> <span class="nav-text">1.线性滤波</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-非线性滤波"><span class="nav-number">3.2.</span> <span class="nav-text">2.非线性滤波</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试代码："><span class="nav-number">2.</span> <span class="nav-text">测试代码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、基本滤波器"><span class="nav-number">3.</span> <span class="nav-text">一、基本滤波器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-线性滤波"><span class="nav-number">3.1.</span> <span class="nav-text">1.线性滤波</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-非线性滤波"><span class="nav-number">3.2.</span> <span class="nav-text">2.非线性滤波</span></a></li></ol></li></ol></div>
             
 
           </div>

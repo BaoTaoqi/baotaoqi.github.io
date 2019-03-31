@@ -125,19 +125,19 @@
 
 
 
-<meta name="description" content="前言：我的上一篇的博客的关于傅里叶变换的一些函数补充，理解不易，且行且珍惜～">
+<meta name="description" content="前言我的上一篇的博客的关于傅里叶变换的一些函数补充，理解不易，且行且珍惜～">
 <meta property="og:type" content="article">
 <meta property="og:title" content="离散傅里叶变换函数的补充">
 <meta property="og:url" content="http://yoursite.com/2019/03/23/OpenCV-Learning-Day-13/index.html">
 <meta property="og:site_name" content="Caesar Bao&#39;s blogs">
-<meta property="og:description" content="前言：我的上一篇的博客的关于傅里叶变换的一些函数补充，理解不易，且行且珍惜～">
+<meta property="og:description" content="前言我的上一篇的博客的关于傅里叶变换的一些函数补充，理解不易，且行且珍惜～">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/03/23/OpenCV-Learning-Day-13/1.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/03/23/OpenCV-Learning-Day-13/2.jpg">
-<meta property="og:updated_time" content="2019-03-26T02:52:44.636Z">
+<meta property="og:updated_time" content="2019-03-31T11:26:02.695Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="离散傅里叶变换函数的补充">
-<meta name="twitter:description" content="前言：我的上一篇的博客的关于傅里叶变换的一些函数补充，理解不易，且行且珍惜～">
+<meta name="twitter:description" content="前言我的上一篇的博客的关于傅里叶变换的一些函数补充，理解不易，且行且珍惜～">
 <meta name="twitter:image" content="http://yoursite.com/2019/03/23/OpenCV-Learning-Day-13/1.jpg">
 
 
@@ -407,7 +407,7 @@
       
 
       
-        <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>我的上一篇的博客的关于傅里叶变换的一些函数补充，理解不易，且行且珍惜～</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我的上一篇的博客的关于傅里叶变换的一些函数补充，理解不易，且行且珍惜～</p>
 <a id="more"></a>
 <p>测试代码在上一篇。<br>原图：<br><img src="/2019/03/23/OpenCV-Learning-Day-13/1.jpg"><br>测试图；<br><img src="/2019/03/23/OpenCV-Learning-Day-13/2.jpg"></p>
 <h2 id="一、getOptimalDFTSize-函数"><a href="#一、getOptimalDFTSize-函数" class="headerlink" title="一、getOptimalDFTSize()函数"></a>一、getOptimalDFTSize()函数</h2><p>返回给定向量尺寸经过DFT变换后结果的最优尺寸大小。其函数定义：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getOptimalDFTSize</span><span class="params">(<span class="keyword">int</span> vecsize)</span></span></span><br></pre></td></tr></table></figure><br>int vecsize: 输入向量尺寸大小(vector size)<br>DFT变换在一个向量尺寸上不是一个单调函数，当计算两个数组卷积或对一个数组进行光学分析，它常常会用0扩充一些数组来得到稍微大点的数组以达到比原来数组计算更快的目的。一个尺寸是2阶指数（2,4,8,16,32……）的数组计算速度最快，一个数组尺寸是2、3、5的倍数（例如：300 = 5*5*3*2*2）同样有很高的处理效率。<br>getOptimalDFTSize()函数返回大于或等于vecsize的最小数值N，这样尺寸为N的向量进行DFT变换能得到更高的处理效率。在当前N通过p，q，r等一些整数得出N = 2^p*3^q*5^r.<br>这个函数不能直接用于DCT（离散余弦变换）最优尺寸的估计，可以通过getOptimalDFTSize((vecsize+1)/2)*2得到。</p>
@@ -629,7 +629,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言："><span class="nav-number">1.</span> <span class="nav-text">前言：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、getOptimalDFTSize-函数"><span class="nav-number">2.</span> <span class="nav-text">一、getOptimalDFTSize()函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、magnitude-函数"><span class="nav-number">3.</span> <span class="nav-text">二、magnitude()函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、copyMakeBorder"><span class="nav-number">4.</span> <span class="nav-text">三、copyMakeBorder()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、normalize-函数"><span class="nav-number">5.</span> <span class="nav-text">四、normalize() 函数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、getOptimalDFTSize-函数"><span class="nav-number">2.</span> <span class="nav-text">一、getOptimalDFTSize()函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、magnitude-函数"><span class="nav-number">3.</span> <span class="nav-text">二、magnitude()函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、copyMakeBorder"><span class="nav-number">4.</span> <span class="nav-text">三、copyMakeBorder()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、normalize-函数"><span class="nav-number">5.</span> <span class="nav-text">四、normalize() 函数</span></a></li></ol></div>
             
 
           </div>

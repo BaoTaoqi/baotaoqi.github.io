@@ -125,18 +125,18 @@
 
 
 
-<meta name="description" content="本文内容包括：一、erode 图像腐蚀（dilate 图像膨胀）二、blur 均值滤波三、canny边缘检测 文末提供测试图片">
+<meta name="description" content="本文内容包括一、erode 图像腐蚀（dilate 图像膨胀）二、blur 均值滤波三、canny边缘检测 文末提供测试图片">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图像初级操作">
 <meta property="og:url" content="http://yoursite.com/2019/03/10/OpenCV-Learning-Day-1/index.html">
 <meta property="og:site_name" content="Caesar Bao&#39;s blogs">
-<meta property="og:description" content="本文内容包括：一、erode 图像腐蚀（dilate 图像膨胀）二、blur 均值滤波三、canny边缘检测 文末提供测试图片">
+<meta property="og:description" content="本文内容包括一、erode 图像腐蚀（dilate 图像膨胀）二、blur 均值滤波三、canny边缘检测 文末提供测试图片">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/03/10/OpenCV-Learning-Day-1/Phone.png">
-<meta property="og:updated_time" content="2019-03-26T02:46:13.099Z">
+<meta property="og:updated_time" content="2019-03-31T11:27:08.269Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图像初级操作">
-<meta name="twitter:description" content="本文内容包括：一、erode 图像腐蚀（dilate 图像膨胀）二、blur 均值滤波三、canny边缘检测 文末提供测试图片">
+<meta name="twitter:description" content="本文内容包括一、erode 图像腐蚀（dilate 图像膨胀）二、blur 均值滤波三、canny边缘检测 文末提供测试图片">
 <meta name="twitter:image" content="http://yoursite.com/2019/03/10/OpenCV-Learning-Day-1/Phone.png">
 
 
@@ -406,7 +406,7 @@
       
 
       
-        <h2 id="本文内容包括："><a href="#本文内容包括：" class="headerlink" title="本文内容包括："></a>本文内容包括：</h2><p>一、erode 图像腐蚀（dilate 图像膨胀）<br>二、blur 均值滤波<br>三、canny边缘检测</p>
+        <h2 id="本文内容包括"><a href="#本文内容包括" class="headerlink" title="本文内容包括"></a>本文内容包括</h2><p>一、erode 图像腐蚀（dilate 图像膨胀）<br>二、blur 均值滤波<br>三、canny边缘检测</p>
 <p>文末提供测试图片</p>
 <a id="more"></a>
 <h2 id="一、erode-图像腐蚀（dilate-图像膨胀）"><a href="#一、erode-图像腐蚀（dilate-图像膨胀）" class="headerlink" title="一、erode 图像腐蚀（dilate 图像膨胀）"></a>一、erode 图像腐蚀（dilate 图像膨胀）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;opencv2/imgproc/imgproc.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Mat srcImage = imread(<span class="string">"Phone.png"</span>);</span><br><span class="line">    imshow(<span class="string">"former"</span>,srcImage);</span><br><span class="line">    Mat element = getStructuringElement(MORPH_RECT,Size(<span class="number">15</span>,<span class="number">15</span>));</span><br><span class="line">    Mat dstImage;</span><br><span class="line">    erode(srcImage,dstImage,element);</span><br><span class="line">    imshow(<span class="string">"later"</span>,dstImage);</span><br><span class="line">    waitKey(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -634,7 +634,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本文内容包括："><span class="nav-number">1.</span> <span class="nav-text">本文内容包括：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、erode-图像腐蚀（dilate-图像膨胀）"><span class="nav-number">2.</span> <span class="nav-text">一、erode 图像腐蚀（dilate 图像膨胀）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、blur-均值滤波"><span class="nav-number">3.</span> <span class="nav-text">二、blur 均值滤波</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、canny边缘检测"><span class="nav-number">4.</span> <span class="nav-text">三、canny边缘检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试图像："><span class="nav-number">5.</span> <span class="nav-text">测试图像：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本文内容包括"><span class="nav-number">1.</span> <span class="nav-text">本文内容包括</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、erode-图像腐蚀（dilate-图像膨胀）"><span class="nav-number">2.</span> <span class="nav-text">一、erode 图像腐蚀（dilate 图像膨胀）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、blur-均值滤波"><span class="nav-number">3.</span> <span class="nav-text">二、blur 均值滤波</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、canny边缘检测"><span class="nav-number">4.</span> <span class="nav-text">三、canny边缘检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试图像："><span class="nav-number">5.</span> <span class="nav-text">测试图像：</span></a></li></ol></div>
             
 
           </div>
