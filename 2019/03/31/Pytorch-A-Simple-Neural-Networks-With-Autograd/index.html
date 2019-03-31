@@ -125,21 +125,17 @@
 
 
 
-<meta name="description" content="前言本章主要介绍图像的简单载入、显示和输出，新内容有namedWindow()函数、图像的ROI（感兴趣区域）以及图像的输出imwrite()函数，顺带科普一下c++文件中常常定义在main函数中的两个形参argc和argv究竟是什么意思～">
+<meta name="description" content="前言：今天的训练模型将在昨天的训练模型基础上做出改进，通过Pytorch中的autograd包替代后向传播中的手动链式求导，实现自动梯度功能。（昨天的后向传播部分写的非常简略，主要是里面有个.t()函数一直查不出来是干啥用的……感觉自己理解的也非常模糊，只知道是在求偏导数……幸好有autograd可以掩盖我的无知……）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="图像的简单载入、显示和输出">
-<meta property="og:url" content="http://yoursite.com/2019/03/15/OpenCV-Learning-Day-5/index.html">
+<meta property="og:title" content="简单训练模型加入autograd实现自动梯度计算">
+<meta property="og:url" content="http://yoursite.com/2019/03/31/Pytorch-A-Simple-Neural-Networks-With-Autograd/index.html">
 <meta property="og:site_name" content="Caesar Bao&#39;s blogs">
-<meta property="og:description" content="前言本章主要介绍图像的简单载入、显示和输出，新内容有namedWindow()函数、图像的ROI（感兴趣区域）以及图像的输出imwrite()函数，顺带科普一下c++文件中常常定义在main函数中的两个形参argc和argv究竟是什么意思～">
+<meta property="og:description" content="前言：今天的训练模型将在昨天的训练模型基础上做出改进，通过Pytorch中的autograd包替代后向传播中的手动链式求导，实现自动梯度功能。（昨天的后向传播部分写的非常简略，主要是里面有个.t()函数一直查不出来是干啥用的……感觉自己理解的也非常模糊，只知道是在求偏导数……幸好有autograd可以掩盖我的无知……）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/03/15/OpenCV-Learning-Day-5/Girl.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/03/15/OpenCV-Learning-Day-5/logo.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/03/15/OpenCV-Learning-Day-5/Girl+logo.jpg">
-<meta property="og:updated_time" content="2019-03-26T02:37:41.718Z">
+<meta property="og:updated_time" content="2019-03-31T11:23:58.241Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="图像的简单载入、显示和输出">
-<meta name="twitter:description" content="前言本章主要介绍图像的简单载入、显示和输出，新内容有namedWindow()函数、图像的ROI（感兴趣区域）以及图像的输出imwrite()函数，顺带科普一下c++文件中常常定义在main函数中的两个形参argc和argv究竟是什么意思～">
-<meta name="twitter:image" content="http://yoursite.com/2019/03/15/OpenCV-Learning-Day-5/Girl.jpg">
+<meta name="twitter:title" content="简单训练模型加入autograd实现自动梯度计算">
+<meta name="twitter:description" content="前言：今天的训练模型将在昨天的训练模型基础上做出改进，通过Pytorch中的autograd包替代后向传播中的手动链式求导，实现自动梯度功能。（昨天的后向传播部分写的非常简略，主要是里面有个.t()函数一直查不出来是干啥用的……感觉自己理解的也非常模糊，只知道是在求偏导数……幸好有autograd可以掩盖我的无知……）">
 
 
 
@@ -169,13 +165,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/15/OpenCV-Learning-Day-5/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/31/Pytorch-A-Simple-Neural-Networks-With-Autograd/">
 
 
 
 
 
-  <title>图像的简单载入、显示和输出 | Caesar Bao's blogs</title>
+  <title>简单训练模型加入autograd实现自动梯度计算 | Caesar Bao's blogs</title>
   
 
 
@@ -314,7 +310,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/15/OpenCV-Learning-Day-5/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/31/Pytorch-A-Simple-Neural-Networks-With-Autograd/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Caesar Bao">
@@ -331,7 +327,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">图像的简单载入、显示和输出</h1>
+          <h1 class="post-title" itemprop="name headline">简单训练模型加入autograd实现自动梯度计算</h1>
         
 
         <div class="post-meta">
@@ -343,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-15T21:27:49+08:00">
-                2019-03-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-31T18:40:23+08:00">
+                2019-03-31
               </time>
             
 
@@ -366,8 +362,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenCV/" itemprop="url" rel="index">
-                    <span itemprop="name">OpenCV</span>
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
                   </a>
                 </span>
 
@@ -408,13 +404,11 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本章主要介绍图像的简单载入、显示和输出，新内容有namedWindow()函数、图像的ROI（感兴趣区域）以及图像的输出imwrite()函数，顺带科普一下c++文件中常常定义在main函数中的两个形参argc和argv究竟是什么意思～</p>
+        <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>今天的训练模型将在昨天的训练模型基础上做出改进，通过Pytorch中的autograd包替代后向传播中的手动链式求导，实现自动梯度功能。<br>（昨天的后向传播部分写的非常简略，主要是里面有个.t()函数一直查不出来是干啥用的……感觉自己理解的也非常模糊，只知道是在求偏导数……幸好有autograd可以掩盖我的无知……）</p>
 <a id="more"></a>
-<h2 id="一、图像的载入、显示和输出"><a href="#一、图像的载入、显示和输出" class="headerlink" title="一、图像的载入、显示和输出"></a>一、图像的载入、显示和输出</h2><p>测试代码：<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/imgproc/imgproc.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">int</span> main()&#123;</span><br><span class="line">    Mat <span class="built_in">image</span> = imread(<span class="string">"Girl.jpg"</span>);</span><br><span class="line">    Mat logo = imread(<span class="string">"logo.jpg"</span>);</span><br><span class="line"></span><br><span class="line">    namedWindow(<span class="string">"Girl"</span>);</span><br><span class="line">    imshow(<span class="string">"Girl"</span>,<span class="built_in">image</span>);</span><br><span class="line"></span><br><span class="line">    namedWindow(<span class="string">"logo"</span>);</span><br><span class="line">    imshow(<span class="string">"logo"</span>,logo);</span><br><span class="line">    Mat imageROI;</span><br><span class="line">    imageROI = <span class="built_in">image</span>(Rect(<span class="number">1600</span>,<span class="number">2100</span>,logo.cols,logo.rows));</span><br><span class="line">    <span class="comment">//imageROI = image(Range(2100,2100+logo.rows),Range(1600,1600+logo.cols));</span></span><br><span class="line"></span><br><span class="line">    addWeighted(imageROI,<span class="number">0.5</span>,logo,<span class="number">1</span>,<span class="number">0</span>,imageROI);</span><br><span class="line"></span><br><span class="line">    namedWindow(<span class="string">"Girl+logo"</span>);</span><br><span class="line">    imshow(<span class="string">"Girl+logo"</span>,<span class="built_in">image</span>);</span><br><span class="line"></span><br><span class="line">    imwrite(<span class="string">"Output.jpg"</span>,<span class="built_in">image</span>);</span><br><span class="line"></span><br><span class="line">    waitKey(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>原图：<br><img src="/2019/03/15/OpenCV-Learning-Day-5/Girl.jpg"><br><img src="/2019/03/15/OpenCV-Learning-Day-5/logo.jpg"></p>
-<p>效果图；<br><img src="/2019/03/15/OpenCV-Learning-Day-5/Girl+logo.jpg"></p>
-<p>1.为什么会有namedWindow()函数？<br>在简单的图像处理中，我们通常只要读取图像，经过处理后使用imshow()函数输出图像即可，但是在进阶操作中，我们可能会在执行代码生成的窗口上放置滚动条或者按钮，这时候我们就需要在代码执行前就定义这个窗口，这就是namedWindow()函数的作用。<br>函数原型：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">nameWindow</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">const</span> <span class="built_in">string</span>&amp; winname,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> flags = WINDOW_AUTOSIZE</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span></span><br></pre></td></tr></table></figure><br>其中第二个参数可以设置窗口能否放缩以及是否支持OpenGL。<br>2.ROI（region of interest）感兴趣区域<br>圈定一块图像中需要处理的区域，既节省性能，又便于操作。需要定义一个Mat类型以存放图像的ROI，设置ROI其实就是在原来图片上指定一个区域，而这个区域只是新创建了一个图片文件的头信息而已并没有产生新的图片，文件头里的图片区域的起始位置指向了ROI区域的左上角位置，所以在ROI上做的任何操作都会影响原图片。设置ROI区域有两种方法，测试代码里的注释是另一种，两者效果相同。<br>3.imwrite()函数：输出图像到文件。<br>函数原型：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">imwrite</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">const</span> <span class="built_in">string</span>&amp; filename, </span></span></span><br><span class="line"><span class="function"><span class="params">    InputArray img, </span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; params=<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;()</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span></span><br></pre></td></tr></table></figure><br>注意：第一个参数文件名要带上后缀</p>
-<h2 id="二、argc和argv"><a href="#二、argc和argv" class="headerlink" title="二、argc和argv"></a>二、argc和argv</h2><p>argc、argv中的arg指的是参数（argument），因此argc的全称为argument counter和argument vector，其中argc为整数，用来统计运行程序时送给main函数的命令行参数的个数；而*argv[]:为字符串数组用来存放指向的字符串参数的指针数组，每一个元素指向一个参数。各成员含义如下：<br>argv[0]指向程序运行的全路径名<br>argv[1]指向在命令行中执行程序名后的第一个字符串<br>argv[2]指向在命令行中执行程序名后的第二个字符串<br>argv[3]指向在命令行中执行程序名后的第三个字符串<br>argv[argv]为NULL</p>
+<h2 id="测试代码："><a href="#测试代码：" class="headerlink" title="测试代码："></a>测试代码：</h2><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">import</span> torch</span><br><span class="line"></span><br><span class="line">from torch.autograd <span class="built_in">import</span> Variable</span><br><span class="line"><span class="attr">batch_n</span> = <span class="number">100</span></span><br><span class="line"><span class="attr">hidden_layer</span> = <span class="number">100</span></span><br><span class="line"><span class="attr">input_data</span> = <span class="number">1000</span></span><br><span class="line"><span class="attr">output_data</span> = <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="attr">x</span> = Variable(torch.randn(batch_n, input_data), <span class="attr">requires_grad=False)</span></span><br><span class="line"><span class="attr">y</span> = Variable(torch.randn(batch_n, output_data), <span class="attr">requires_grad=False)</span></span><br><span class="line"></span><br><span class="line"><span class="attr">w1</span> = Variable(torch.randn(input_data, hidden_layer), <span class="attr">requires_grad=True)</span></span><br><span class="line"><span class="attr">w2</span> = Variable(torch.randn(hidden_layer, output_data), <span class="attr">requires_grad=True)</span></span><br><span class="line"></span><br><span class="line"><span class="attr">epoch_n</span> = <span class="number">20</span></span><br><span class="line"><span class="attr">learning_rate</span> = <span class="number">1</span>e-<span class="number">6</span></span><br><span class="line"></span><br><span class="line">for epoch <span class="keyword">in</span> range(epoch_n):</span><br><span class="line">    <span class="attr">y_pred</span> = x.mm(w1).clamp(<span class="attr">min=0).mm(w2)</span></span><br><span class="line">    <span class="attr">loss</span> = (y_pred - y).pow(<span class="number">2</span>).sum()</span><br><span class="line">    print(<span class="string">"Epoch:&#123;&#125;, Loss:&#123;:.4f&#125;"</span>.format(epoch, loss.data))</span><br><span class="line"></span><br><span class="line">    loss.backward()</span><br><span class="line"></span><br><span class="line">    w1.data <span class="attr">-=</span> learning_rate * w1.grad.data</span><br><span class="line">    w2.data <span class="attr">-=</span> learning_rate * w2.grad.data</span><br><span class="line"></span><br><span class="line">    w1.grad.data.zero_()</span><br><span class="line">    w2.grad.data.zero_()</span><br></pre></td></tr></table></figure>
+<p>运行结果：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">Epoch</span><span class="selector-pseudo">:0</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:46125084.0000</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-pseudo">:1</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:97735776.0000</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-pseudo">:2</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:353886400.0000</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-pseudo">:3</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:681477440.0000</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-pseudo">:4</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:70418120.0000</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-pseudo">:5</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:19572480.0000</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-pseudo">:6</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:10264789.0000</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-pseudo">:7</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:6297184.5000</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-pseudo">:8</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:4209952.5000</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-pseudo">:9</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:2988804.0000</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-pseudo">:10</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:2225728.0000</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-pseudo">:11</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:1726369.1250</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-pseudo">:12</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:1387307.2500</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-pseudo">:13</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:1149427.6250</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-pseudo">:14</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:977541.5625</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-pseudo">:15</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:849593.3125</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-pseudo">:16</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:751535.7500</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-pseudo">:17</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:674315.6875</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-pseudo">:18</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:611959.5625</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-pseudo">:19</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:560407.1250</span></span><br></pre></td></tr></table></figure><br>由于在定义输入层和输出层时使用的是randn随即正态分布函数，运行结果会有很大不同，我挑了一组比较明显的结果。</p>
+<h2 id="代码分析："><a href="#代码分析：" class="headerlink" title="代码分析："></a>代码分析：</h2><p>torch.grad包u实现自动梯度的过程大致为先通过定义的Tensor类型数据变量在前向传播中生成计算图，然后根据计算图和输出结果计算出每个参数需要更新的梯度，并通过后向传播完成对参数的梯度更新。<br>开头需要导入torch.grad包中的Variable类从而对Tensor数据类型变量进行封装。在计算图中，每个节点都应该是Variable类型的对象，这样才能应用自动梯度的功能。<br>requires_grad一看名字就知道，决定了Variable类型是否需要计算梯度，w1、w2是权重参数，所以为True。<br>.backward()函数根据我们自己设置的需求求出梯度值并保留，再结合学习速率对权重参数进行更新，最后通过.zero_()函数对grad.data进行置零，否则梯度值会一直累加，影响后边儿计算。</p>
 
       
     </div>
@@ -439,8 +433,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/14/OpenCV-Learning-Day-4/" rel="next" title="基本视频读取和操作">
-                <i class="fa fa-chevron-left"></i> 基本视频读取和操作
+              <a href="/2019/03/30/Pytorch-A-Simple-Neural-Networks/" rel="next" title="入门神经网络训练模型搭建">
+                <i class="fa fa-chevron-left"></i> 入门神经网络训练模型搭建
               </a>
             
           </div>
@@ -448,10 +442,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/16/OpenCV-Learning-Day-6/" rel="prev" title="滑动条创建和使用">
-                滑动条创建和使用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -630,7 +620,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、图像的载入、显示和输出"><span class="nav-number">2.</span> <span class="nav-text">一、图像的载入、显示和输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、argc和argv"><span class="nav-number">3.</span> <span class="nav-text">二、argc和argv</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言："><span class="nav-number">1.</span> <span class="nav-text">前言：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试代码："><span class="nav-number">2.</span> <span class="nav-text">测试代码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码分析："><span class="nav-number">3.</span> <span class="nav-text">代码分析：</span></a></li></ol></div>
             
 
           </div>
