@@ -125,24 +125,19 @@
 
 
 
-<meta name="description" content="前言本片主要介绍五个常见的滤波器（线性滤波、方框滤波、高斯滤波、中值滤波、双边滤波），文章基本是我翻阅博客整理而成的笔记～目前水平太菜了自己写不了基础知识，只能整理大神们的文章了！">
+<meta name="description" content="前言本来今天是开始读取MNIST数据集完成手写数字识别的，但是遇到很大问题，MNIST的图像通道不一样导致运行错误。所以转向简单一点的线性模型来做做看。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="五种基本滤波器">
-<meta property="og:url" content="http://yoursite.com/2019/03/12/OpenCV-Learning-Day-2/index.html">
+<meta property="og:title" content="一维线性回归模型">
+<meta property="og:url" content="http://yoursite.com/2019/04/02/One-Dimensional-Linear-Regression-Model/index.html">
 <meta property="og:site_name" content="Caesar Bao&#39;s blogs">
-<meta property="og:description" content="前言本片主要介绍五个常见的滤波器（线性滤波、方框滤波、高斯滤波、中值滤波、双边滤波），文章基本是我翻阅博客整理而成的笔记～目前水平太菜了自己写不了基础知识，只能整理大神们的文章了！">
+<meta property="og:description" content="前言本来今天是开始读取MNIST数据集完成手写数字识别的，但是遇到很大问题，MNIST的图像通道不一样导致运行错误。所以转向简单一点的线性模型来做做看。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/03/12/OpenCV-Learning-Day-2/InputImage.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/03/12/OpenCV-Learning-Day-2/blur.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/03/12/OpenCV-Learning-Day-2/boxFilter.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/03/12/OpenCV-Learning-Day-2/GaussianBlur.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/03/12/OpenCV-Learning-Day-2/medianBlur.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/03/12/OpenCV-Learning-Day-2/bilateralFilter.jpg">
-<meta property="og:updated_time" content="2019-03-31T11:26:56.929Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/02/One-Dimensional-Linear-Regression-Model/1.jpg">
+<meta property="og:updated_time" content="2019-04-02T13:06:50.638Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="五种基本滤波器">
-<meta name="twitter:description" content="前言本片主要介绍五个常见的滤波器（线性滤波、方框滤波、高斯滤波、中值滤波、双边滤波），文章基本是我翻阅博客整理而成的笔记～目前水平太菜了自己写不了基础知识，只能整理大神们的文章了！">
-<meta name="twitter:image" content="http://yoursite.com/2019/03/12/OpenCV-Learning-Day-2/InputImage.jpg">
+<meta name="twitter:title" content="一维线性回归模型">
+<meta name="twitter:description" content="前言本来今天是开始读取MNIST数据集完成手写数字识别的，但是遇到很大问题，MNIST的图像通道不一样导致运行错误。所以转向简单一点的线性模型来做做看。">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/02/One-Dimensional-Linear-Regression-Model/1.jpg">
 
 
 
@@ -172,13 +167,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/12/OpenCV-Learning-Day-2/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/02/One-Dimensional-Linear-Regression-Model/">
 
 
 
 
 
-  <title>五种基本滤波器 | Caesar Bao's blogs</title>
+  <title>一维线性回归模型 | Caesar Bao's blogs</title>
   
 
 
@@ -317,7 +312,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/12/OpenCV-Learning-Day-2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/02/One-Dimensional-Linear-Regression-Model/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Caesar Bao">
@@ -334,7 +329,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">五种基本滤波器</h1>
+          <h1 class="post-title" itemprop="name headline">一维线性回归模型</h1>
         
 
         <div class="post-meta">
@@ -346,8 +341,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-12T21:48:45+08:00">
-                2019-03-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-02T20:38:34+08:00">
+                2019-04-02
               </time>
             
 
@@ -369,8 +364,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenCV/" itemprop="url" rel="index">
-                    <span itemprop="name">OpenCV</span>
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
                   </a>
                 </span>
 
@@ -411,26 +406,13 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本片主要介绍五个常见的滤波器（线性滤波、方框滤波、高斯滤波、中值滤波、双边滤波），文章基本是我翻阅博客整理而成的笔记～目前水平太菜了自己写不了基础知识，只能整理大神们的文章了！</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本来今天是开始读取MNIST数据集完成手写数字识别的，但是遇到很大问题，MNIST的图像通道不一样导致运行错误。所以转向简单一点的线性模型来做做看。</p>
 <a id="more"></a>
-<h2 id="测试代码："><a href="#测试代码：" class="headerlink" title="测试代码："></a>测试代码：</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include&lt;opencv2/opencv.hpp&gt;</span></span><br><span class="line"><span class="comment">#include&lt;opencv2/highgui/highgui.hpp&gt;</span></span><br><span class="line"><span class="comment">#include&lt;opencv2/imgproc/imgproc.hpp&gt;</span></span><br><span class="line"><span class="comment">#include&lt;string&gt;</span></span><br><span class="line">using namespace cv<span class="comment">;</span></span><br><span class="line">using namespace std<span class="comment">;</span></span><br><span class="line">int main()&#123;</span><br><span class="line">    Mat srcImage = imread(<span class="string">"Bilbo.jpg"</span>)<span class="comment">;</span></span><br><span class="line">    imshow(<span class="string">"Input Image"</span>,srcImage)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    Mat dstImage<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">blur(srcImage,dstImage,Size(3,3));</span></span><br><span class="line"><span class="keyword"> </span>   imshow(<span class="string">"blur"</span>,dstImage)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">boxFilter(srcImage,dstImage,-1,Size(3,3));</span></span><br><span class="line"><span class="keyword"> </span>   imshow(<span class="string">"boxFilter"</span>,dstImage)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    GaussianBlur(srcImage,dstImage,Size(<span class="number">3</span>,<span class="number">3</span>),<span class="number">0</span>,<span class="number">0</span>)<span class="comment">;</span></span><br><span class="line">    imshow(<span class="string">"GaussianBlur"</span>,dstImage)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    medianBlur(srcImage,dstImage,<span class="number">3</span>)<span class="comment">;</span></span><br><span class="line">    imshow(<span class="string">"medianBlur"</span>,dstImage)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">bilateralFilter(srcImage,dstImage,100,0,0);</span></span><br><span class="line"><span class="keyword"> </span>   imshow(<span class="string">"bilateralFilter"</span>,dstImage)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">waitKey(0);</span></span><br><span class="line"><span class="keyword">&#125;</span></span><br></pre></td></tr></table></figure>
-<p>效果图：<br><img src="/2019/03/12/OpenCV-Learning-Day-2/InputImage.jpg"></p>
-<h2 id="一、基本滤波器"><a href="#一、基本滤波器" class="headerlink" title="一、基本滤波器"></a>一、基本滤波器</h2><h3 id="1-线性滤波"><a href="#1-线性滤波" class="headerlink" title="1.线性滤波"></a>1.线性滤波</h3><p>均值滤波blur：<br>将一个区域内的像素值求和取平均值，然后用这个平均值替换区域中心的像素值。计算速度很快，但是在去躁的同时会模糊很多细节部分，不容易保存细节。</p>
-<p>函数原型：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> blur(</span><br><span class="line">    InputArray src, <span class="comment">//输入图像</span></span><br><span class="line">    OutputArray dst, <span class="comment">//输出图像</span></span><br><span class="line">    <span class="keyword">Size</span> ksize, <span class="comment">//内核大小</span></span><br><span class="line">    Point anchor = Point(-<span class="number">1</span>,-<span class="number">1</span>), <span class="comment">//锚点位置，默认为中心点</span></span><br><span class="line">    <span class="keyword">int</span> borderType = BORDER_DEFAULT <span class="comment">//用于推断图像外部像素的某种边界模式，默认值BORDER_DEFAULT</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
-<p>效果图：<br><img src="/2019/03/12/OpenCV-Learning-Day-2/blur.jpg"></p>
-<p>方框滤波boxFilter：<br>算法和均值滤波相似，优缺点也相同，均值滤波算是方框滤波的特殊版本。</p>
-<p>效果图：<br><img src="/2019/03/12/OpenCV-Learning-Day-2/boxFilter.jpg"></p>
-<p>高斯滤波GaussianBlur：<br>高斯滤波是专门用于消除满足高斯分布(正态分布)的误差而存在的滤波，此时邻域算子是专门的高斯核，图像中的像素与高斯核做卷积，生成的结果加权平均存放到目标像素中，权重按照二维正态分布，对于抑制符合正态分布的噪声非常有效，并可以增强图像值不同比例下的图像效果。</p>
-<p>函数原型：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> GaussianBlur(</span><br><span class="line">    InputArray src, </span><br><span class="line">    OutputArray dst, </span><br><span class="line">    <span class="keyword">Size</span> ksize, </span><br><span class="line">    <span class="comment">//表示高斯核函数在Y方向的的标准偏差，若sigmaY为零，就将它设为sigmaX，如果sigmaX和sigmaY都是0，那么就由ksize.width和ksize.height计算出来</span></span><br><span class="line">    <span class="keyword">double</span> sigmaX, </span><br><span class="line">    <span class="keyword">double</span> sigmaY=<span class="number">0</span>, </span><br><span class="line">    <span class="keyword">int</span> borderType=BORDER_DEFAULT</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
-<p>效果图：<br><img src="/2019/03/12/OpenCV-Learning-Day-2/GaussianBlur.jpg"></p>
-<h3 id="2-非线性滤波"><a href="#2-非线性滤波" class="headerlink" title="2.非线性滤波"></a>2.非线性滤波</h3><p>中值滤波medianBlur：<br>基本思想就是用像素点的领域灰度的中值来代替该像素点的灰度值，该方法在去除脉冲噪声、椒盐噪声的同时又能保留图像的细节（不会出现边缘模糊的情况）。中值滤波跟均值滤波的思想看起来很相似，只是一个取平均值，一个取中位数，但是均值滤波的计算速度是中值滤波的五倍，具体原因可以看总结。</p>
-<p>函数原型：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">medianBlur</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    InputArray src,</span></span></span><br><span class="line"><span class="function"><span class="params">    OutputArray dst, </span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> ksize <span class="comment">//孔径的线性尺寸（aperture linear size），必须为奇数</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span></span><br></pre></td></tr></table></figure></p>
-<p>效果图：<br><img src="/2019/03/12/OpenCV-Learning-Day-2/medianBlur.jpg"></p>
-<p>双边滤波bilateralFilter：<br>双边滤波的最大特点就是做边缘保存，保边去噪。大概的原理是给定一个范围，如果某些区域点与点之间如果数值差距超出范围，那么这个区域就不滤波了，能够很好的保留图像轮廓。<br>函数原型：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bilateralFilter</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    InputArray src, </span></span></span><br><span class="line"><span class="function"><span class="params">    OutputArray dst, </span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> d, <span class="comment">//在过滤过程中每个像素邻域的直径范围</span></span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">double</span> sigmaColor, <span class="comment">//颜色空间过滤器的sigma值</span></span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">double</span> sigmaSpace, <span class="comment">//坐标空间中滤波器的sigma值</span></span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> borderType=BORDER_DEFAULT  <span class="comment">//用于推断图像外部像素的某种边界模式，默认值BORDER_DEFAULT</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span></span><br></pre></td></tr></table></figure></p>
-<p>注：对sigmaColor、和sigmaSpace两个参数存在比较大的疑惑，因为我不管怎么调后面的参数，效果图好像和原图没有差别…<br>效果图：<br><img src="/2019/03/12/OpenCV-Learning-Day-2/bilateralFilter.jpg"></p>
-<p>3.线性滤波和非线性滤波的区别<br>线性滤波器的原始数据与滤波结果是一种算术运算，即用加减乘除等运算实现，如均值滤波器（模板内像素灰度值的平均值）、高斯滤波器（高斯加权平均值）等。由于线性滤波器是算术运算，有固定的模板，因此滤波器的转移函数是可以确定并且是唯一的（转移函数即模板的傅里叶变换）。</p>
-<p>非线性滤波器的原始数据与滤波结果是一种逻辑关系，即用逻辑运算实现，如最大值滤波器、最小值滤波器、中值滤波器等，是通过比较一定邻域内的灰度值大小来实现的，没有固定的模板，因而也就没有特定的转移函数（因为没有模板作傅里叶变换），另外，膨胀和腐蚀也是通过最大值、最小值滤波器实现的。（这就是为什么均值滤波要比中值滤波快五倍的原因：需要通过排序确定中值后才能生成模版）</p>
-<p>参考资料：<br><blockquote><footer><strong>什么是线性滤波、非线性滤波</strong><cite><a href="https://www.cnblogs.com/snowxshy/p/3855011.html" target="_blank" rel="noopener">https://www.cnblogs.com/snowxshy/p/3855011.html</a></cite></footer></blockquote><br><blockquote><footer><strong>opencv中的各种滤波</strong><cite><a href="https://www.jianshu.com/p/8f4024742821" target="_blank" rel="noopener">https://www.jianshu.com/p/8f4024742821</a></cite></footer></blockquote><br><blockquote><footer><strong>OpenCv基本滤波算法小结 blockquote</strong><cite><a href="https://blog.csdn.net/fzhykx/article/details/79546549" target="_blank" rel="noopener">https://blog.csdn.net/fzhykx/article/details/79546549</a></cite></footer></blockquote><br><blockquote><footer><strong>opencv中的各种滤波函数</strong><cite><a href="https://blog.csdn.net/zoucharming/article/details/70197863" target="_blank" rel="noopener">https://blog.csdn.net/zoucharming/article/details/70197863</a></cite></footer></blockquote><br><blockquote><footer><strong>OpenCV探索之路（三）：滤波操作</strong><cite><a href="https://www.cnblogs.com/skyfsm/p/6873188.html" target="_blank" rel="noopener">https://www.cnblogs.com/skyfsm/p/6873188.html</a></cite></footer></blockquote></p>
+<h2 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h2><figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">import numpy as np</span><br><span class="line">import torch.nn as nn</span><br><span class="line">import torch.optim as optim</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">from torch.autograd import <span class="symbol">Variable</span></span><br><span class="line"></span><br><span class="line">x_train = np.array(</span><br><span class="line">    [[<span class="number">3.3</span>], [<span class="number">4.4</span>], [<span class="number">5.5</span>], [<span class="number">6.71</span>], [<span class="number">6.93</span>], [<span class="number">4.168</span>], [<span class="number">9.779</span>], [<span class="number">6.182</span>], [<span class="number">7.59</span>],</span><br><span class="line">    [<span class="number">2.167</span>], [<span class="number">7.042</span>], [<span class="number">10.791</span>], [<span class="number">5.313</span>], [<span class="number">7.997</span>], [<span class="number">3.1</span>]],</span><br><span class="line">    dtype=np.float32)</span><br><span class="line">y_train = np.array(</span><br><span class="line">    [[<span class="number">1.7</span>], [<span class="number">2.76</span>], [<span class="number">2.09</span>], [<span class="number">3.19</span>], [<span class="number">1.694</span>], [<span class="number">1.573</span>], [<span class="number">3.366</span>], [<span class="number">2.596</span>], [<span class="number">2.53</span>],</span><br><span class="line">    [<span class="number">1.221</span>], [<span class="number">2.827</span>], [<span class="number">3.465</span>], [<span class="number">1.65</span>], [<span class="number">2.904</span>], [<span class="number">1.3</span>]],</span><br><span class="line">    dtype=np.float32)</span><br><span class="line"></span><br><span class="line">x_train = torch.from_numpy(x_train)</span><br><span class="line">y_train = torch.from_numpy(y_train)</span><br><span class="line"></span><br><span class="line">class <span class="symbol">LinearRegression</span>(nn.<span class="symbol">Module</span>):</span><br><span class="line">    def <span class="symbol">__init__</span>(self):</span><br><span class="line">        super(<span class="symbol">LinearRegression</span>, self).<span class="symbol">__init__</span>()</span><br><span class="line">        self.linear = nn.<span class="symbol">Linear</span>(<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    def forward(self, x):</span><br><span class="line">        out = self.linear(x)</span><br><span class="line">        return out</span><br><span class="line"></span><br><span class="line">model = <span class="symbol">LinearRegression</span>()</span><br><span class="line"></span><br><span class="line">loss_fn = nn.<span class="symbol">MSELoss</span>()</span><br><span class="line">optimizer = optim.<span class="symbol">SGD</span>(model.parameters(), lr=<span class="number">1e-3</span>)</span><br><span class="line"></span><br><span class="line">epoch_n = <span class="number">1000</span></span><br><span class="line"></span><br><span class="line">for epoch in range(epoch_n):</span><br><span class="line">    inputs = <span class="symbol">Variable</span>(x_train)</span><br><span class="line">    target = <span class="symbol">Variable</span>(y_train)</span><br><span class="line"></span><br><span class="line">    out = model(inputs)</span><br><span class="line">    loss = loss_fn(out, target)</span><br><span class="line"></span><br><span class="line">    optimizer.zero_grad()</span><br><span class="line">    loss.backward()</span><br><span class="line">    optimizer.step()</span><br><span class="line"></span><br><span class="line">    if epoch <span class="comment">% 100 == 0:</span></span><br><span class="line">        print(<span class="string">"Epoch[&#123;&#125;/&#123;&#125;], Loss:&#123;:.6f&#125;"</span>.format(epoch, epoch_n, loss)</span><br><span class="line"></span><br><span class="line">model.eval()</span><br><span class="line">predict = model(<span class="symbol">Variable</span>(x_train))</span><br><span class="line">predict = predict.data.numpy()</span><br><span class="line">plt.plot(x_train.numpy(), y_train.numpy(), <span class="string">"ro"</span>, label=<span class="string">"Original Data"</span>)</span><br><span class="line">plt.plot(x_train.numpy(), predict, label=<span class="string">"Fitting Line"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">Epoch</span><span class="selector-attr">[0/1000]</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:1.168603</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-attr">[100/1000]</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:0.179088</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-attr">[200/1000]</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:0.178578</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-attr">[300/1000]</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:0.178095</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-attr">[400/1000]</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:0.177635</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-attr">[500/1000]</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:0.177198</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-attr">[600/1000]</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:0.176784</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-attr">[700/1000]</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:0.176390</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-attr">[800/1000]</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:0.176015</span></span><br><span class="line"><span class="selector-tag">Epoch</span><span class="selector-attr">[900/1000]</span>, <span class="selector-tag">Loss</span><span class="selector-pseudo">:0.175660</span></span><br></pre></td></tr></table></figure>
+<p>matplotlib图像<br><img src="/2019/04/02/One-Dimensional-Linear-Regression-Model/1.jpg"></p>
+<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><p>先给几个横坐标和预期纵坐标，然后将numpy的ndarray形式转换成torch的tensor形式。<br>接着定义一个类继承自torch.nn.Module，用于前向传播，<strong>init</strong>()和forward()两个函数是自定义类的主要函数。在<strong>init</strong>()中添加一句super(LinearRegression, self).<strong>init</strong>()用于继承父类的初始化函数。<strong>init</strong>()中主要是对神经网络的模块进行声明，具体函数实现则是在forward()中。自定义类中的成员都通过self指针来进行访问，所以参数列表中都包含了self。<br>在这里误差函数还是使用MSELoss()用于计算均方误差，因为有的点可能在直线下面，我们不允许有负数存在；优化函数则使用SGD()，具体不知道为什么，但是换成Adam()运行效果没有SGD()好。<br>开始训练时要把节点用Variable()纳入计算图中，不然计算不了梯度。<br>optimizer.zero_grad()用于梯度置零，否则会造成结果不收敛。<br>loss.backward()计算梯度。<br>optimizer.step()更新梯度。</p>
+<p>打印结果后可以整一个matplotlib的图出来看看。</p>
 
       
     </div>
@@ -455,8 +437,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/11/Something-Fundamental-about-Convolution/" rel="next" title="了解卷积：深度学习中的卷积之我见">
-                <i class="fa fa-chevron-left"></i> 了解卷积：深度学习中的卷积之我见
+              <a href="/2019/04/01/Pytorch-A-Simple-Neural-Networks-With-torch-nn-and-torch-optim/" rel="next" title="走向自动化：神经网络训练模型加入torch.nn和torch.optim">
+                <i class="fa fa-chevron-left"></i> 走向自动化：神经网络训练模型加入torch.nn和torch.optim
               </a>
             
           </div>
@@ -464,10 +446,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/13/OpenCV-Learning-Day-3/" rel="prev" title="三种基本边缘检测算子">
-                三种基本边缘检测算子 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -646,7 +624,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试代码："><span class="nav-number">2.</span> <span class="nav-text">测试代码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、基本滤波器"><span class="nav-number">3.</span> <span class="nav-text">一、基本滤波器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-线性滤波"><span class="nav-number">3.1.</span> <span class="nav-text">1.线性滤波</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-非线性滤波"><span class="nav-number">3.2.</span> <span class="nav-text">2.非线性滤波</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试代码"><span class="nav-number">2.</span> <span class="nav-text">测试代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试结果"><span class="nav-number">3.</span> <span class="nav-text">测试结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码分析"><span class="nav-number">4.</span> <span class="nav-text">代码分析</span></a></li></ol></div>
             
 
           </div>
