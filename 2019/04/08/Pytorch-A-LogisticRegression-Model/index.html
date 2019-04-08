@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Caesar Bao's blogs" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="前言开始涉及logistic回归，主要解决分类问题，贴一个学到的简单二分类，看书写的代码问题很大，问题比较多，踩坑踩死我……">
+<meta property="og:type" content="article">
+<meta property="og:title" content="logistic回归模型">
+<meta property="og:url" content="http://yoursite.com/2019/04/08/Pytorch-A-LogisticRegression-Model/index.html">
+<meta property="og:site_name" content="Caesar Bao&#39;s blogs">
+<meta property="og:description" content="前言开始涉及logistic回归，主要解决分类问题，贴一个学到的简单二分类，看书写的代码问题很大，问题比较多，踩坑踩死我……">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/04/08/Pytorch-A-LogisticRegression-Model/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/08/Pytorch-A-LogisticRegression-Model/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/08/Pytorch-A-LogisticRegression-Model/sigmoid.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/08/Pytorch-A-LogisticRegression-Model/BCELoss.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/08/Pytorch-A-LogisticRegression-Model/4.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/08/Pytorch-A-LogisticRegression-Model/5.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/08/Pytorch-A-LogisticRegression-Model/3.jpg">
+<meta property="og:updated_time" content="2019-04-08T11:35:31.209Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="logistic回归模型">
+<meta name="twitter:description" content="前言开始涉及logistic回归，主要解决分类问题，贴一个学到的简单二分类，看书写的代码问题很大，问题比较多，踩坑踩死我……">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/08/Pytorch-A-LogisticRegression-Model/2.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/08/Pytorch-A-LogisticRegression-Model/">
+
+
+
+
+
+  <title>logistic回归模型 | Caesar Bao's blogs</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Caesar Bao's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/08/Pytorch-A-LogisticRegression-Model/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Caesar Bao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Caesar Bao's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">logistic回归模型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-08T17:17:15+08:00">
+                2019-04-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>开始涉及logistic回归，主要解决分类问题，贴一个学到的简单二分类，看书写的代码问题很大，问题比较多，踩坑踩死我……<br><img src="/2019/04/08/Pytorch-A-LogisticRegression-Model/2.jpg"></p>
+<a id="more"></a>
+<h2 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</span><br><span class="line"><span class="title">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="title">with</span> open('<span class="class"><span class="keyword">data</span>.txt', 'r') as f:</span></span><br><span class="line">    data_list = f.readlines()</span><br><span class="line">    data_list = [i.split('\n')[<span class="number">0</span>] for i <span class="keyword">in</span> data_list]</span><br><span class="line">    data_list = [i.split(',') for i <span class="keyword">in</span> data_list]</span><br><span class="line">    <span class="class"><span class="keyword">data</span> = [(<span class="title">float</span>(<span class="title">i</span>[0]), float(<span class="title">i</span>[1]), float(<span class="title">i</span>[2])) for i in data_list]</span></span><br><span class="line">    <span class="class"><span class="keyword">data</span> = torch.<span class="type">Tensor</span>(<span class="title">data</span>)</span></span><br><span class="line">    x_data = <span class="class"><span class="keyword">data</span>[:, 0:2]</span></span><br><span class="line">    y_data = <span class="class"><span class="keyword">data</span>[:, 2]</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="type">LogisticRegression</span>(<span class="title">nn</span>.<span class="type">Module</span>):</span></span><br><span class="line"><span class="class">    def __init__(<span class="title">self</span>):</span></span><br><span class="line"><span class="class">        super(<span class="type">LogisticRegression</span>, <span class="title">self</span>).__init__()</span></span><br><span class="line"><span class="class">        self.lr = nn.<span class="type">Linear</span>(2, 1)</span></span><br><span class="line"><span class="class">        self.sm = nn.<span class="type">Sigmoid</span>()</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">    def forward(<span class="title">self</span>, <span class="title">x</span>):</span></span><br><span class="line"><span class="class">        x = self.lr(<span class="title">x</span>)</span></span><br><span class="line"><span class="class">        x = self.sm(<span class="title">x</span>)</span></span><br><span class="line"><span class="class">        return x</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">logistic_model = <span class="type">LogisticRegression</span>()</span></span><br><span class="line"><span class="class">loss_fn = nn.<span class="type">BCELoss</span>()</span></span><br><span class="line"><span class="class">optimizer = optim.<span class="type">SGD</span>(<span class="title">logistic_model</span>.<span class="title">parameters</span>(), lr=1e-3, momentum=0.9)</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">for epoch in range(50000):</span></span><br><span class="line"><span class="class">    x = <span class="type">Variable</span>(<span class="title">x_data</span>)</span></span><br><span class="line"><span class="class">    y = <span class="type">Variable</span>(<span class="title">y_data</span>.<span class="title">unsqueeze</span>(1))</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">    out = logistic_model(<span class="title">x</span>)</span></span><br><span class="line"><span class="class">    loss = loss_fn(<span class="title">out</span>, <span class="title">y</span>)</span></span><br><span class="line"><span class="class">    print_loss = loss.data.item()</span></span><br><span class="line"><span class="class">    mask = out.ge(0.5).float()</span></span><br><span class="line"><span class="class">    correct = (<span class="title">mask</span> == <span class="title">y</span>).sum()</span></span><br><span class="line"><span class="class">    acc = correct.data.item() / x.size(0)</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">    optimizer.zero_grad()</span></span><br><span class="line"><span class="class">    loss.backward()</span></span><br><span class="line"><span class="class">    optimizer.step()</span></span><br><span class="line"><span class="class">    if (<span class="title">epoch</span> + 1) % 1000 == 0:</span></span><br><span class="line"><span class="class">        print('*' * 10)</span></span><br><span class="line"><span class="class">        print('<span class="title">epoch</span>&#123;&#125;'.<span class="title">format</span>(<span class="title">epoch</span> + 1))</span></span><br><span class="line"><span class="class">        print('<span class="title">loss</span> <span class="title">is</span>:&#123;:.4<span class="title">f</span>&#125;'.<span class="title">format</span>(<span class="title">print_loss</span>))</span></span><br><span class="line"><span class="class">        print('<span class="title">acc</span> <span class="title">is</span>:&#123;:.4<span class="title">f</span>&#125;'.<span class="title">format</span>(<span class="title">acc</span>))</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">x0 = list(<span class="title">filter</span>(<span class="title">lambda</span> <span class="title">x</span>: <span class="title">x</span>[-1] == 0.0, <span class="title">data</span>))</span></span><br><span class="line"><span class="class">x1 = list(<span class="title">filter</span>(<span class="title">lambda</span> <span class="title">x</span>: <span class="title">x</span>[-1] == 1.0, <span class="title">data</span>))</span></span><br><span class="line"><span class="class">plot_x0_0 = [i[0] for i in x0]</span></span><br><span class="line"><span class="class">plot_x0_1 = [i[1] for i in x0]</span></span><br><span class="line"><span class="class">plot_x1_0 = [i[0] for i in x1]</span></span><br><span class="line"><span class="class">plot_x1_1 = [i[1] for i in x1]</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">plt.plot(<span class="title">plot_x0_0</span>, <span class="title">plot_x0_1</span>, '<span class="title">ro'</span>, <span class="title">label</span>='<span class="title">x_0'</span>)</span></span><br><span class="line"><span class="class">plt.plot(<span class="title">plot_x1_0</span>, <span class="title">plot_x1_1</span>, '<span class="title">bo'</span>, <span class="title">label</span>='<span class="title">x_1'</span>)</span></span><br><span class="line"><span class="class">plt.legend(<span class="title">loc</span>='<span class="title">best'</span>)</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">w0, w1 = logistic_model.lr.weight[0]</span></span><br><span class="line"><span class="class">w0 = w0.item()</span></span><br><span class="line"><span class="class">w1 = w1.item()</span></span><br><span class="line"><span class="class">b = logistic_model.lr.bias.item()</span></span><br><span class="line"><span class="class">plot_x = np.arange(30, 100, 0.1)</span></span><br><span class="line"><span class="class">plot_y = (-<span class="title">w0</span> * <span class="title">plot_x</span> - <span class="title">b</span>) / w1</span></span><br><span class="line"><span class="class">plt.plot(<span class="title">plot_x</span>, <span class="title">plot_y</span>)</span></span><br><span class="line"><span class="class">plt.show()</span></span><br></pre></td></tr></table></figure>
+<h3 id="测试集"><a href="#测试集" class="headerlink" title="测试集"></a>测试集</h3><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">34.62365962451697</span>,<span class="number">78.0246928153624</span>,<span class="number">0</span></span><br><span class="line"><span class="number">30.2867107622687</span>,<span class="number">43.89499752400101</span>,<span class="number">0</span></span><br><span class="line"><span class="number">35.84740876993872</span>,<span class="number">72.90219802708364</span>,<span class="number">0</span></span><br><span class="line"><span class="number">60.18259938620976</span>,<span class="number">86.3855209546826</span>,<span class="number">1</span></span><br><span class="line"><span class="number">79.0327360507101</span>,<span class="number">75.3443764369103</span>,<span class="number">1</span></span><br><span class="line"><span class="number">45.08327747668339</span>,<span class="number">56.3163717815305</span>,<span class="number">0</span></span><br><span class="line"><span class="number">61.10666453684766</span>,<span class="number">96.51142588489624</span>,<span class="number">1</span></span><br><span class="line"><span class="number">75.02474556738889</span>,<span class="number">46.55401354116538</span>,<span class="number">1</span></span><br><span class="line"><span class="number">76.09878670226257</span>,<span class="number">87.42056971926803</span>,<span class="number">1</span></span><br><span class="line"><span class="number">84.43281996120035</span>,<span class="number">43.53339331072109</span>,<span class="number">1</span></span><br><span class="line"><span class="number">95.86155507093572</span>,<span class="number">38.22527805795094</span>,<span class="number">0</span></span><br><span class="line"><span class="number">75.01365838958247</span>,<span class="number">30.60326323428011</span>,<span class="number">0</span></span><br><span class="line"><span class="number">82.30705337399482</span>,<span class="number">76.48196330235604</span>,<span class="number">1</span></span><br><span class="line"><span class="number">69.36458875970939</span>,<span class="number">97.71869196188608</span>,<span class="number">1</span></span><br><span class="line"><span class="number">39.53833914367223</span>,<span class="number">76.03681085115882</span>,<span class="number">0</span></span><br><span class="line"><span class="number">53.9710521485623</span>,<span class="number">89.20735013750265</span>,<span class="number">1</span></span><br><span class="line"><span class="number">69.07014406283025</span>,<span class="number">52.74046973016765</span>,<span class="number">1</span></span><br><span class="line"><span class="number">67.9468554771161746</span>,<span class="number">67.857410673128</span>,<span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">*********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch5000</span></span><br><span class="line"><span class="strong">loss is:0.5205</span></span><br><span class="line"><span class="strong">acc is:0.8889</span></span><br><span class="line"><span class="strong">*</span>********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch10000</span></span><br><span class="line"><span class="strong">loss is:0.4586</span></span><br><span class="line"><span class="strong">acc is:0.8889</span></span><br><span class="line"><span class="strong">*</span>********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch15000</span></span><br><span class="line"><span class="strong">loss is:0.4240</span></span><br><span class="line"><span class="strong">acc is:0.8889</span></span><br><span class="line"><span class="strong">*</span>********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch20000</span></span><br><span class="line"><span class="strong">loss is:0.4026</span></span><br><span class="line"><span class="strong">acc is:0.8333</span></span><br><span class="line"><span class="strong">*</span>********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch25000</span></span><br><span class="line"><span class="strong">loss is:0.3885</span></span><br><span class="line"><span class="strong">acc is:0.7778</span></span><br><span class="line"><span class="strong">*</span>********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch30000</span></span><br><span class="line"><span class="strong">loss is:0.3786</span></span><br><span class="line"><span class="strong">acc is:0.7778</span></span><br><span class="line"><span class="strong">*</span>********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch35000</span></span><br><span class="line"><span class="strong">loss is:0.3714</span></span><br><span class="line"><span class="strong">acc is:0.7778</span></span><br><span class="line"><span class="strong">*</span>********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch40000</span></span><br><span class="line"><span class="strong">loss is:0.3661</span></span><br><span class="line"><span class="strong">acc is:0.7778</span></span><br><span class="line"><span class="strong">*</span>********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch45000</span></span><br><span class="line"><span class="strong">loss is:0.3620</span></span><br><span class="line"><span class="strong">acc is:0.7778</span></span><br><span class="line"><span class="strong">*</span>********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch50000</span></span><br><span class="line"><span class="strong">loss is:0.3589</span></span><br><span class="line"><span class="strong">acc is:0.7778</span></span><br></pre></td></tr></table></figure>
+<h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><img src="/2019/04/08/Pytorch-A-LogisticRegression-Model/1.jpg">
+<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><h3 id="一、sigmoid-激活函数"><a href="#一、sigmoid-激活函数" class="headerlink" title="一、sigmoid()激活函数"></a>一、sigmoid()激活函数</h3><p>logistic回归最核心的部分在于sigmoid激活函数，实质上这个训练模型很简单，隐藏层只有一层，再在隐藏层上面加一个sigmoid激活函数就输出到输出层了，sigmoid我放个图：<br><img src="/2019/04/08/Pytorch-A-LogisticRegression-Model/sigmoid.jpg"><br>在经过sigmoid激活之后所有输出值都会介于0到1之间，因为sigmoid函数在原点处变化的非常快，并且在向坐标轴两侧传播时会非常快的趋向0和1，因此作为分类问题的激活函数非常合适。</p>
+<h3 id="二、BCELoss-二分类交叉熵函数"><a href="#二、BCELoss-二分类交叉熵函数" class="headerlink" title="二、BCELoss()二分类交叉熵函数"></a>二、BCELoss()二分类交叉熵函数</h3><p>BCELoss()公式：<br><img src="/2019/04/08/Pytorch-A-LogisticRegression-Model/BCELoss.jpg"><br>在BCELoss()函数中，第一个参数必须在0到1之间，因此一般是要配合sigmoid()函数进行使用。<br>BCELoss()函数与MSELoss()函数的区别在于BCELoss()能够区别正负数，在计算值相加平均的过程中有些误差会消失，但是MSELoss()不能区别正负数，因此误差不会消失。因此分类问题BCELoss较好。<br>还有一点，由于sigmoid函数存在在向坐标轴两侧传播时会非常快的趋向0和1的特性，会导致梯度不明显甚至梯度消失的问题，不利于反向传播。在使用交叉熵作为损失函数后，反向传播的梯度不与sigmoid函数的导数有关，这就从一定程度上避免了梯度下降。<br>但但但但是，在我孱弱短小的数据集下，MSELoss()函数的成绩实现了反超：<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">*********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch5000</span></span><br><span class="line"><span class="strong">loss is:0.2167</span></span><br><span class="line"><span class="strong">acc is:0.6111</span></span><br><span class="line"><span class="strong">*</span>********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch10000</span></span><br><span class="line"><span class="strong">loss is:0.1857</span></span><br><span class="line"><span class="strong">acc is:0.8333</span></span><br><span class="line"><span class="strong">*</span>********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch15000</span></span><br><span class="line"><span class="strong">loss is:0.1663</span></span><br><span class="line"><span class="strong">acc is:0.8889</span></span><br><span class="line"><span class="strong">*</span>********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch20000</span></span><br><span class="line"><span class="strong">loss is:0.1538</span></span><br><span class="line"><span class="strong">acc is:0.8889</span></span><br><span class="line"><span class="strong">*</span>********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch25000</span></span><br><span class="line"><span class="strong">loss is:0.1453</span></span><br><span class="line"><span class="strong">acc is:0.8889</span></span><br><span class="line"><span class="strong">*</span>********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch30000</span></span><br><span class="line"><span class="strong">loss is:0.1392</span></span><br><span class="line"><span class="strong">acc is:0.8889</span></span><br><span class="line"><span class="strong">*</span>********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch35000</span></span><br><span class="line"><span class="strong">loss is:0.1348</span></span><br><span class="line"><span class="strong">acc is:0.8889</span></span><br><span class="line"><span class="strong">*</span>********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch40000</span></span><br><span class="line"><span class="strong">loss is:0.1314</span></span><br><span class="line"><span class="strong">acc is:0.8889</span></span><br><span class="line"><span class="strong">*</span>********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch45000</span></span><br><span class="line"><span class="strong">loss is:0.1288</span></span><br><span class="line"><span class="strong">acc is:0.8889</span></span><br><span class="line"><span class="strong">*</span>********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch50000</span></span><br><span class="line"><span class="strong">loss is:0.1267</span></span><br><span class="line"><span class="strong">acc is:0.8889</span></span><br></pre></td></tr></table></figure><br>效果图：<br><img src="/2019/04/08/Pytorch-A-LogisticRegression-Model/4.jpg"><br>实质上，在BCELoss()函数的训练过程中accuracy曾达到过0.8889：<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">*********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch5000</span></span><br><span class="line"><span class="strong">loss is:0.5468</span></span><br><span class="line"><span class="strong">acc is:0.7778</span></span><br><span class="line"><span class="strong">*</span>********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch10000</span></span><br><span class="line"><span class="strong">loss is:0.4722</span></span><br><span class="line"><span class="strong">acc is:0.8889</span></span><br><span class="line"><span class="strong">*</span>********<span class="strong">*</span></span><br><span class="line"><span class="strong">epoch15000</span></span><br><span class="line"><span class="strong">loss is:0.4320</span></span><br><span class="line"><span class="strong">acc is:0.8889</span></span><br></pre></td></tr></table></figure><br>效果图<br><img src="/2019/04/08/Pytorch-A-LogisticRegression-Model/5.jpg"><br>但它的误差要大得多，因此这个成绩被“修正”了……<br><img src="/2019/04/08/Pytorch-A-LogisticRegression-Model/3.jpg"><br>具体原因我还分析不出来，估计是测试集样本太少的原因。</p>
+<h3 id="三、41行的ge-函数"><a href="#三、41行的ge-函数" class="headerlink" title="三、41行的ge()函数"></a>三、41行的ge()函数</h3><p>这是在python3中出现的新函数<br>lt(a, b) 相当于 a &lt; b<br>le(a,b) 相当于 a &lt;= b<br>eq(a,b) 相当于 a == b<br>ne(a,b) 相当于 a != b<br>gt(a,b) 相当于 a &gt; b<br>ge(a, b)相当于 a&gt;= b<br>41行代码的功能是如果大于0.5就返回1，反之返回0。返回值是0和1而不是bool类型。</p>
+<h3 id="四、偷懒不存在的"><a href="#四、偷懒不存在的" class="headerlink" title="四、偷懒不存在的"></a>四、偷懒不存在的</h3><p>matplotlib()图像我是拷贝的，具体实现不太清楚，待我仔细研究研究有空单独写一写。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/03/Multivariable-Linear-Regression-Model/" rel="next" title="多维线性回归模型">
+                <i class="fa fa-chevron-left"></i> 多维线性回归模型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MzQyNy8xOTk2OA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Caesar Bao">
+            
+              <p class="site-author-name" itemprop="name">Caesar Bao</p>
+              <p class="site-description motion-element" itemprop="description">Someone becomes silent for getting more people hear his voice.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/BaoTaoqi" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:464115280@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Friend-Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://me.csdn.net/weixin_43094820" title="Caesar_Bao" target="_blank">Caesar_Bao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://me.csdn.net/qq_33431368" title="Che_Hongshu" target="_blank">Che_Hongshu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wzyxv1n.top" title="V1N" target="_blank">V1N</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://me.csdn.net/Snooch_Jones" title="Freddy_Jones" target="_blank">Freddy_Jones</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试代码"><span class="nav-number">2.</span> <span class="nav-text">测试代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#测试集"><span class="nav-number">2.1.</span> <span class="nav-text">测试集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试结果"><span class="nav-number">2.2.</span> <span class="nav-text">测试结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#效果图"><span class="nav-number">2.3.</span> <span class="nav-text">效果图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码分析"><span class="nav-number">3.</span> <span class="nav-text">代码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、sigmoid-激活函数"><span class="nav-number">3.1.</span> <span class="nav-text">一、sigmoid()激活函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、BCELoss-二分类交叉熵函数"><span class="nav-number">3.2.</span> <span class="nav-text">二、BCELoss()二分类交叉熵函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、41行的ge-函数"><span class="nav-number">3.3.</span> <span class="nav-text">三、41行的ge()函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、偷懒不存在的"><span class="nav-number">3.4.</span> <span class="nav-text">四、偷懒不存在的</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Caesar Bao</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访客量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
